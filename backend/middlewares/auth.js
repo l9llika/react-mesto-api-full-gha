@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const AuthError = require('../errors/auth-error');
 
-const { JWT_SECRET = 'super-srtong-secret' } = process.env;
+const { JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -12,7 +12,6 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
-  // const token = req.headers.authorization;
   let payload;
 
   try {

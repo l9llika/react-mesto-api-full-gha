@@ -80,11 +80,9 @@ class Api {
     return this._checkResponse(response);
   }
 }
- 
-
-
 
 export const api = new Api({
+  // baseUrl: 'http://api.mesto-l9llika.nomoredomains.monster',
   baseUrl: 'http://localhost:3000',
   headers: {
     "Content-Type": "application/json",

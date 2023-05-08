@@ -1,3 +1,4 @@
+// export const BASE_URL = "http://api.mesto-l9llika.nomoredomains.monster";
 export const BASE_URL = "http://localhost:3000";
 
 function checkResponse(response) {
@@ -43,7 +44,6 @@ export const authorize = (data) => {
       }
     });
 }
-
 
 export const checkToken = async (token) => {
   const response = await fetch(`${BASE_URL}/users/me`, {
