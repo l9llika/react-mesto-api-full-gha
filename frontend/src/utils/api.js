@@ -91,5 +91,3 @@ export const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
-// Authorization: '39a4caee-006a-46b7-a27f-18f6a879f957',

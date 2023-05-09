@@ -1,5 +1,4 @@
 export const BASE_URL = "https://api.mesto-l9llika.nomoredomains.monster";
-// export const BASE_URL = "http://localhost:3000";
 
 function checkResponse(response) {
   if (!response.ok) {

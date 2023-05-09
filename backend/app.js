@@ -5,20 +5,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-// const { errors, celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 
 const app = express();
 
 const handleErrors = require('./middlewares/errors');
-// const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-// const { createUser, login } = require('./controllers/users');
-// const NotFoundError = require('./errors/not-found-error');
-// const usersRouter = require('./routes/users');
-// const cardsRouter = require('./routes/cards');
-// const { regExpLink } = require('./utils/regExpLink');
 
 const { PORT = 3000 } = process.env;
 
@@ -78,26 +70,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// app.post('/signin', celebrate({
-//   body: Joi.object().keys({
-//     email: Joi.string().required().email(),
-//     password: Joi.string().required(),
-//   }),
-// }), login);
-// app.post('/signup', celebrate({
-//   body: Joi.object().keys({
-//     name: Joi.string().min(2).max(30),
-//     about: Joi.string().min(2).max(30),
-//     avatar: Joi.string().pattern(regExpLink),
-//     email: Joi.string().required().email(),
-//     password: Joi.string().required(),
-//   }),
-// }), createUser);
-
-// app.use(auth);
-
-// app.use('/users', usersRouter);
-// app.use('/cards', cardsRouter);
 app.use('/', require('./routes/index'));
 
 app.use(errorLogger);
@@ -107,5 +79,3 @@ app.use(errors());
 app.use(handleErrors);
 
 app.listen(PORT);
-// scp -r ./backend2/* l9llika@158.160.61.148:/home/l9llika/backend
-// scp -r ./build/* l9llika@158.160.61.148:/home/l9llika/frontend
