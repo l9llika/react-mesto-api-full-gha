@@ -37,46 +37,37 @@ const allowedCors = [
   'http://localhost:3001',
 ];
 
+const corsOptions = {
+  origin: allowedCors,
+  optionSuccesStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+  allowedHeaders: ['Access-Control-Allow-Origin', 'Content-type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
-// mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://0.0.0.0:27017/mestodb', {
   useNewUrlParser: true,
-});
+})
+  .then(() => {
+    // eslint-disable-next-line no-console
+    console.log('db conected');
+  })
+  .catch((err) => {
+    // eslint-disable-next-line no-console
+    console.log(err);
+  });
 
 app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use(helmet());
 
 app.use(limiter);
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-  console.log(origin);
-  console.log(allowedCors);
-  const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-  }
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    return res.end();
-  }
-
-  next();
-  return null;
-});
 
 app.use(requestLogger);
 

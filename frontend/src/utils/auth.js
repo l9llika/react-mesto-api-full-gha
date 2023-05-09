@@ -1,5 +1,5 @@
-// export const BASE_URL = "http://api.mesto-l9llika.nomoredomains.monster";
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.mesto-l9llika.nomoredomains.monster";
+// export const BASE_URL = "http://localhost:3000";
 
 function checkResponse(response) {
   if (!response.ok) {
@@ -11,6 +11,7 @@ function checkResponse(response) {
 export const register = (data) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -29,6 +30,7 @@ export const register = (data) => {
 export const authorize = (data) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -48,6 +50,7 @@ export const authorize = (data) => {
 export const checkToken = async (token) => {
   const response = await fetch(`${BASE_URL}/users/me`, {
     method: "GET",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

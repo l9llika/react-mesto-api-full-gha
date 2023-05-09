@@ -13,6 +13,7 @@ class Api {
 
   async getUserInfo() {
     const response = await fetch(`${this._baseUrl}/users/me`, {
+    credentials: "include",
     headers: {
       ...this._headers,
       authorization: `Bearer ${localStorage.getItem("token")}`
@@ -22,6 +23,7 @@ class Api {
 
   async getInitialCards() {
     const response = await fetch(`${this._baseUrl}/cards`, {
+      credentials: "include",
       headers: {
         ...this._headers,
         authorization: `Bearer ${localStorage.getItem("token")}`
@@ -33,6 +35,7 @@ class Api {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {...this._headers, authorization: `Bearer ${localStorage.getItem("token")}`},
+      credentials: "include",
       body: JSON.stringify(userData),
     });
     return this._checkResponse(response);
@@ -81,9 +84,9 @@ class Api {
   }
 }
 
+  
 export const api = new Api({
-  // baseUrl: 'http://api.mesto-l9llika.nomoredomains.monster',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.mesto-l9llika.nomoredomains.monster',
   headers: {
     "Content-Type": "application/json",
   },
