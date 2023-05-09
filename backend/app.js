@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
-
+const cors = require('cors');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -47,6 +47,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(helmet());
 
@@ -54,6 +55,8 @@ app.use(limiter);
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
+  console.log(origin);
+  console.log(allowedCors);
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
