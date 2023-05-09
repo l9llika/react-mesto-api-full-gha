@@ -7,7 +7,7 @@ const RegistrationError = require('../errors/registration-error');
 const AuthError = require('../errors/auth-error');
 const { SALT_NUMBER } = require('../utils/constants');
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'secret-key' } = process.env;
 
 const getUsers = async (req, res, next) => {
   try {
