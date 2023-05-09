@@ -26,7 +26,7 @@ const getUserById = async (req, res, next) => {
     }
     res.status(200).send(user);
   } catch (err) {
-    if (err.name === 'CastError' || err.name === 'ValidationError') {
+    if (err.name === 'CastError') {
       next(new ValidationError('Переданы некорректные данные пользователя'));
     } else {
       next(err);
@@ -42,7 +42,7 @@ const getUserInfo = async (req, res, next) => {
     }
     res.status(200).send(user);
   } catch (err) {
-    if (err.name === 'CastError') {
+    if (err.name === 'ValidationError') {
       next(new ValidationError('Переданы некорректные данные пользователя'));
     } else {
       next(err);
@@ -100,7 +100,7 @@ const updateUser = async (req, res, next) => {
     }
     res.status(200).send(user);
   } catch (err) {
-    if (err.name === 'ValidationError' || err.name === 'CastError') {
+    if (err.name === 'ValidationError') {
       next(new ValidationError('Переданы некорректные данные при обновлении профиля'));
     } else {
       next(err);
@@ -121,7 +121,7 @@ const updateAvatar = async (req, res, next) => {
     }
     res.status(200).send(user);
   } catch (err) {
-    if (err.name === 'ValidationError' || err.name === 'CastError') {
+    if (err.name === 'ValidationError') {
       next(new ValidationError('Переданы некорректные данные при обновлении аватара'));
     } else {
       next(err);

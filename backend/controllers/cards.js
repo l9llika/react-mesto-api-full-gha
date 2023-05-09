@@ -6,7 +6,7 @@ const ForbiddenDeleteError = require('../errors/forbidden-delete-error');
 const getCards = async (req, res, next) => {
   try {
     const cards = await Card.find({});
-    res.status(200).send(cards);
+    res.status(201).send(cards);
   } catch (err) {
     next(err);
   }
@@ -79,7 +79,7 @@ const dislikeCard = async (req, res, next) => {
     }
     res.status(200).send(card);
   } catch (err) {
-    if (err.name === 'CastError' || err.name === 'ValidationError') {
+    if (err.name === 'CastError') {
       next(new ValidationError('Переданы некорректные данные для удаления лайка'));
     } else {
       next(err);
